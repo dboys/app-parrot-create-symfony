@@ -36,7 +36,7 @@ class Base {
         $res = array();
         $time = time();
         $file_path = "/tmp/$time/app-parrot-create-XXXXXXX";
-        $lines_list = explode('\n', $this->template_content);
+        $lines_list = explode(PHP_EOL, $this->template_content);
         $fh = null;
 
         foreach ($lines_list as $line) {
@@ -61,7 +61,14 @@ class Base {
                 $fh = fopen($full_file_path,'w') or die("Unable to open {$full_file_path} file!");;
             }
             else {
-                fwrite($fh, $line);
+                if ($fh){
+                    if ($line) {
+                        fwrite($fh, $line);
+                    }
+                    else {
+                        fwrite($fh, PHP_EOL);
+                    }
+                }
             }
 
         }
