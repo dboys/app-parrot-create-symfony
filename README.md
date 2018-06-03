@@ -9,6 +9,10 @@ To run process:
 
     php bin/console server:run
 
+# Testing
+
+    phpunit tests/
+
 # View
 
 You can now view the app running in your favorite web browser at

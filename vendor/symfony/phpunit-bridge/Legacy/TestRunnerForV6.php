@@ -11,12 +11,15 @@
 
 namespace Symfony\Bridge\PhpUnit\Legacy;
 
+use PHPUnit\TextUI\TestRunner as BaseRunner;
+use Symfony\Bridge\PhpUnit\SymfonyTestsListener;
+
 /**
  * {@inheritdoc}
  *
  * @internal
  */
-class TestRunner extends \PHPUnit_TextUI_TestRunner
+class TestRunnerForV6 extends BaseRunner
 {
     /**
      * {@inheritdoc}
@@ -25,7 +28,7 @@ class TestRunner extends \PHPUnit_TextUI_TestRunner
     {
         $listener = new SymfonyTestsListener();
 
-        $result = parent::handleConfiguration($arguments);
+        parent::handleConfiguration($arguments);
 
         $arguments['listeners'] = isset($arguments['listeners']) ? $arguments['listeners'] : array();
 
@@ -42,7 +45,5 @@ class TestRunner extends \PHPUnit_TextUI_TestRunner
         if (!$registeredLocally) {
             $arguments['listeners'][] = $listener;
         }
-
-        return $result;
     }
 }

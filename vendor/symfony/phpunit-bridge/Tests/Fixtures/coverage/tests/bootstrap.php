@@ -9,18 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Symfony\Bridge\PhpUnit\TextUI;
+require __DIR__.'/../src/BarCov.php';
+require __DIR__.'/../src/FooCov.php';
+
+require __DIR__.'/../../../../Legacy/CoverageListenerTrait.php';
 
 if (class_exists('PHPUnit_Runner_Version') && version_compare(\PHPUnit_Runner_Version::id(), '6.0.0', '<')) {
-    class_alias('Symfony\Bridge\PhpUnit\Legacy\TestRunnerForV5', 'Symfony\Bridge\PhpUnit\TextUI\TestRunner');
+    require_once __DIR__.'/../../../../Legacy/CoverageListenerForV5.php';
 } elseif (version_compare(\PHPUnit\Runner\Version::id(), '7.0.0', '<')) {
-    class_alias('Symfony\Bridge\PhpUnit\Legacy\TestRunnerForV6', 'Symfony\Bridge\PhpUnit\TextUI\TestRunner');
+    require_once __DIR__.'/../../../../Legacy/CoverageListenerForV6.php';
 } else {
-    class_alias('Symfony\Bridge\PhpUnit\Legacy\TestRunnerForV7', 'Symfony\Bridge\PhpUnit\TextUI\TestRunner');
+    require_once __DIR__.'/../../../../Legacy/CoverageListenerForV7.php';
 }
 
-if (false) {
-    class TestRunner
-    {
-    }
-}
+require __DIR__.'/../../../../CoverageListener.php';
